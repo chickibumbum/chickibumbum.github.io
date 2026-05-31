@@ -63,6 +63,7 @@ body {
   color: var(--pf-text);
   line-height: 1.7;
   overflow-x: hidden;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23d4af37" stroke="%23ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z"/></svg>') 12 12, auto;
 }
 
 /* Scrollbar */
@@ -70,9 +71,9 @@ body {
 ::-webkit-scrollbar-track { background: var(--pf-bg); }
 ::-webkit-scrollbar-thumb { background: var(--pf-gold-dark); border-radius: 3px; }
 
-a { text-decoration: none; color: inherit; transition: var(--pf-transition); }
+a { text-decoration: none; color: inherit; transition: var(--pf-transition); cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="%239b59b6" stroke="%23ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z"/></svg>') 14 14, pointer; }
 img { max-width: 100%; display: block; }
-button { cursor: pointer; font-family: inherit; }
+button { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="%239b59b6" stroke="%23ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z"/></svg>') 14 14, pointer; font-family: inherit; }
 
 .pf-container {
   max-width: var(--pf-container);
@@ -1431,4 +1432,63 @@ button { cursor: pointer; font-family: inherit; }
   .pf-attribute-row { gap: 12px; }
   .pf-hero__name-line1 { font-size: 2.2rem; }
   .pf-hero__name-line2 { font-size: 1.8rem; }
+}
+
+/* ============================================================
+   MINI GAME
+   ============================================================ */
+.pf-game {
+  background: var(--pf-bg-2);
+}
+.pf-game__container {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  background: var(--pf-bg-3);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius);
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+.pf-game__container canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.pf-game__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8,9,16,0.8);
+  transition: opacity 0.3s;
+}
+.pf-game__overlay.pf-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.pf-game__overlay h3 {
+  font-family: var(--pf-font-heading);
+  color: var(--pf-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  animation: pf-pulse 2s infinite;
+  text-align: center;
+  padding: 0 20px;
+}
+.pf-game__score {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-family: var(--pf-font-heading);
+  color: var(--pf-text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+.pf-game__score span {
+  color: var(--pf-gold-light);
+  font-weight: 700;
 }

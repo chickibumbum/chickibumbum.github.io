@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.a  = Math.random() * 0.6 + 0.15;
       this.da = (Math.random() * 0.004 + 0.001) * (Math.random() > 0.5 ? 1 : -1);
       this.col = COLORS[Math.floor(Math.random() * COLORS.length)];
-      this.isStar = Math.random() < 0.12;
+      this.isStar = Math.random() < 0.45;
       this.tw = Math.random() * 0.02 + 0.005; // twinkle speed
       this.tp = Math.random() * Math.PI * 2;
     }
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function initParticles(count = 120) {
+  function initParticles(count = 250) {
     particles = [];
     for (let i = 0; i < count; i++) particles.push(new Particle());
   }
@@ -337,5 +337,296 @@ document.addEventListener('DOMContentLoaded', () => {
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
+
+  /* ============================================================
+     MINI GAME (Star Runner)
+     ============================================================ */
+  const gameCanvas = document.getElementById('pf-game-canvas');
+  if (gameCanvas) {
+    const gCtx = gameCanvas.getContext('2d');
+    const overlay = document.getElementById('pf-game-overlay');
+    const msgEl = document.getElementById('pf-game-msg');
+    const scoreEl = document.getElementById('pf-game-score');
+    const hiEl = document.getElementById('pf-game-hi');
+    
+    let isPlaying = false;
+    let isGameOver = false;
+    let score = 0;
+    let hiScore = localStorage.getItem('pf-star-hi') || 0;
+    hiEl.textContent = hiScore;
+    
+    let gameSpeed = 5;
+    let gravity = 0.6;
+    let frame = 0;
+    
+    const star = {
+      x: 50,
+      y: 150,
+      w: 30,
+      h: 30,
+      dy: 0,
+      jumpForce: -10,
+      grounded: false,
+      jumpTimer: 0
+    };
+    
+    let obstacles = [];
+    
+    function resetGame() {
+      star.y = 150 - star.h;
+      star.dy = 0;
+      obstacles = [];
+      score = 0;
+      gameSpeed = 5;
+      frame = 0;
+      isGameOver = false;
+    }
+    
+    function drawStar() {
+      gCtx.save();
+      gCtx.translate(star.x + star.w/2, star.y + star.h/2);
+      gCtx.rotate(frame * 0.1);
+      gCtx.fillStyle = '#d4af37';
+      gCtx.shadowColor = 'rgba(212, 175, 55, 0.8)';
+      gCtx.shadowBlur = 10;
+      gCtx.beginPath();
+      // Draw a 5-point star
+      for (let i = 0; i < 5; i++) {
+        gCtx.lineTo(Math.cos((18 + i * 72) / 180 * Math.PI) * 15,
+                    -Math.sin((18 + i * 72) / 180 * Math.PI) * 15);
+        gCtx.lineTo(Math.cos((54 + i * 72) / 180 * Math.PI) * 7,
+                    -Math.sin((54 + i * 72) / 180 * Math.PI) * 7);
+      }
+      gCtx.closePath();
+      gCtx.fill();
+      gCtx.restore();
+    }
+    
+    function drawObstacle(obs) {
+      gCtx.fillStyle = '#9b59b6';
+      gCtx.shadowColor = 'rgba(155, 89, 182, 0.5)';
+      gCtx.shadowBlur = 8;
+      gCtx.beginPath();
+      // Draw a crescent moon shape
+      gCtx.arc(obs.x + obs.w/2, obs.y + obs.h/2, obs.w/2, Math.PI*1.5, Math.PI*0.5, true);
+      gCtx.arc(obs.x + obs.w/2 - 5, obs.y + obs.h/2, obs.w/2, Math.PI*0.5, Math.PI*1.5, false);
+      gCtx.fill();
+      gCtx.closePath();
+    }
+    
+    function updateGame() {
+      if (!isPlaying) return;
+      
+      requestAnimationFrame(updateGame);
+      gCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+      
+      // Ground line
+      gCtx.beginPath();
+      gCtx.moveTo(0, 150);
+      gCtx.lineTo(600, 150);
+      gCtx.strokeStyle = 'rgba(212, 175, 55, 0.3)';
+      gCtx.stroke();
+      
+      // Star Physics
+      star.dy += gravity;
+      star.y += star.dy;
+      
+      if (star.y + star.h >= 150) {
+        star.y = 150 - star.h;
+        star.dy = 0;
+        star.grounded = true;
+      } else {
+        star.grounded = false;
+      }
+      
+      drawStar();
+      
+      // Obstacles
+      if (frame % Math.max(60, Math.floor(120 - gameSpeed*2)) === 0) {
+        let size = Math.random() * 10 + 20;
+        obstacles.push({
+          x: gameCanvas.width,
+          y: 150 - size,
+          w: size,
+          h: size
+        });
+      }
+      
+      for (let i = 0; i < obstacles.length; i++) {
+        let o = obstacles[i];
+        o.x -= gameSpeed;
+        drawObstacle(o);
+        
+        // Collision (simple AABB with small forgiveness margin)
+        if (
+          star.x + 5 < o.x + o.w &&
+          star.x + star.w - 5 > o.x &&
+          star.y + 5 < o.y + o.h &&
+          star.y + star.h - 5 > o.y
+        ) {
+          gameOver();
+        }
+      }
+      
+      // Remove off-screen obstacles
+      if (obstacles.length > 0 && obstacles[0].x < -50) {
+        obstacles.shift();
+      }
+      
+      // Score
+      score++;
+      if (score % 10 === 0) scoreEl.textContent = Math.floor(score / 10);
+      if (score % 500 === 0) gameSpeed += 0.5;
+      
+      frame++;
+    }
+    
+    function jump() {
+      if (!isPlaying) {
+        startMsg();
+        return;
+      }
+      if (isGameOver) {
+        resetGame();
+        isGameOver = false;
+        overlay.classList.add('pf-hidden');
+        updateGame();
+        return;
+      }
+      if (star.grounded) {
+        star.dy = star.jumpForce;
+        star.grounded = false;
+      }
+    }
+    
+    function startMsg() {
+      resetGame();
+      isPlaying = true;
+      overlay.classList.add('pf-hidden');
+      updateGame();
+    }
+    
+    function gameOver() {
+      isPlaying = false;
+      isGameOver = true;
+      overlay.classList.remove('pf-hidden');
+      msgEl.innerHTML = 'Game Over!<br>Press Space or Tap to Restart';
+      
+      let finalScore = Math.floor(score / 10);
+      if (finalScore > hiScore) {
+        hiScore = finalScore;
+        localStorage.setItem('pf-star-hi', hiScore);
+        hiEl.textContent = hiScore;
+      }
+    }
+    
+    // Controls
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        if(document.activeElement === gameCanvas || e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+           e.preventDefault();
+           jump();
+        }
+      }
+    });
+    
+    gameCanvas.parentElement.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      jump();
+    });
+    gameCanvas.parentElement.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      jump();
+    }, {passive: false});
+    
+    // Init Draw
+    gCtx.fillStyle = '#0d0e1a';
+    gCtx.fillRect(0,0,600,200);
+    star.y = 150 - star.h;
+    drawStar();
+  }
+
+  /* ============================================================
+     MAGIC MOUSE TRAIL
+     ============================================================ */
+  const trailCanvas = document.createElement('canvas');
+  trailCanvas.id = 'pf-trail-canvas';
+  trailCanvas.style.position = 'fixed';
+  trailCanvas.style.top = '0';
+  trailCanvas.style.left = '0';
+  trailCanvas.style.width = '100vw';
+  trailCanvas.style.height = '100vh';
+  trailCanvas.style.pointerEvents = 'none';
+  trailCanvas.style.zIndex = '9999';
+  document.body.appendChild(trailCanvas);
+  
+  const tCtx = trailCanvas.getContext('2d');
+  let tWidth, tHeight;
+  function resizeTrail() {
+    tWidth = trailCanvas.width = window.innerWidth;
+    tHeight = trailCanvas.height = window.innerHeight;
+  }
+  resizeTrail();
+  window.addEventListener('resize', resizeTrail);
+
+  let mouse = { x: -1000, y: -1000 };
+  let trailParticles = [];
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    // Spawn particles on move
+    for(let i=0; i<3; i++) {
+      trailParticles.push({
+        x: mouse.x,
+        y: mouse.y,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5 + 0.5,
+        life: 1,
+        color: Math.random() > 0.4 ? '#d4af37' : '#c39bd3',
+        size: Math.random() * 2.5 + 0.5
+      });
+    }
+  });
+
+  function animateTrail() {
+    tCtx.clearRect(0, 0, tWidth, tHeight);
+    for (let i = trailParticles.length - 1; i >= 0; i--) {
+      let p = trailParticles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= 0.025;
+      
+      if (p.life <= 0) {
+        trailParticles.splice(i, 1);
+        continue;
+      }
+      
+      tCtx.beginPath();
+      // Draw tiny stars instead of circles for the trail
+      let s = p.size * p.life * 1.5;
+      tCtx.save();
+      tCtx.translate(p.x, p.y);
+      tCtx.rotate(p.life * Math.PI);
+      for (let j = 0; j < 4; j++) {
+        tCtx.rotate(Math.PI / 2);
+        tCtx.moveTo(0, 0);
+        tCtx.lineTo(s * 0.4, s * 0.4);
+        tCtx.lineTo(0, s);
+        tCtx.lineTo(-s * 0.4, s * 0.4);
+      }
+      tCtx.restore();
+      
+      tCtx.fillStyle = p.color;
+      tCtx.globalAlpha = p.life;
+      tCtx.shadowBlur = 8;
+      tCtx.shadowColor = p.color;
+      tCtx.fill();
+    }
+    tCtx.globalAlpha = 1;
+    tCtx.shadowBlur = 0;
+    requestAnimationFrame(animateTrail);
+  }
+  animateTrail();
 
 }); // end DOMContentLoaded
