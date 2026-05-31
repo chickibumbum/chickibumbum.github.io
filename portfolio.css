@@ -37,9 +37,9 @@
   --pf-text-faint:   #4a4760;
 
   /* Fonts */
-  --pf-font-display: 'Cinzel Decorative', 'Cinzel', serif;
-  --pf-font-heading: 'Cinzel', serif;
-  --pf-font-serif:   'IM Fell English', serif;
+  --pf-font-display: 'Playfair Display', serif;
+  --pf-font-heading: 'Playfair Display', serif;
+  --pf-font-serif:   'Playfair Display', serif;
   --pf-font-body:    'Space Grotesk', sans-serif;
 
   /* Spacing */
