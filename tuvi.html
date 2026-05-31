@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiên Cơ Tử Vi - Lập Lá Số & Giải Đoán</title>
+  <meta name="description" content="Thiên Cơ Tử Vi - Trang web lập lá số tử vi và xem tử vi chuyên sâu, khám phá vận mệnh, sự nghiệp và tình duyên." />
+  <meta name="keywords" content="tử vi, lá số tử vi, xem tử vi, vận mệnh, bói toán, phong thủy" />
+  <meta name="author" content="Nguyễn Phương Anh" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================
+       PRELOADER
+       ============================================ -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__spinner"></div>
+    <p class="preloader__text">Đang kết nối vũ trụ...</p>
+  </div>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="#home" class="navbar__logo" id="nav-logo">
+        <i class="fa-solid fa-moon"></i> Thiên Cơ <span class="gold-text">Tử Vi</span>
+      </a>
+
+      <ul class="navbar__menu" id="nav-menu">
+        <li class="navbar__item"><a href="#home" class="navbar__link active" data-section="home">Trang Chủ</a></li>
+        <li class="navbar__item"><a href="#lap-la-so" class="navbar__link" data-section="lap-la-so">Lập Lá Số</a></li>
+        <li class="navbar__item"><a href="#kien-thuc" class="navbar__link" data-section="kien-thuc">Kiến Thức</a></li>
+        <li class="navbar__item"><a href="#lien-he" class="navbar__link" data-section="lien-he">Liên Hệ</a></li>
+      </ul>
+
+      <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       MAIN CONTENT
+       ============================================ -->
+  <main>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="hero section" id="home">
+      <div class="hero__background"></div>
+      <div class="hero__container container">
+        <div class="hero__content">
+          <p class="hero__greeting">Khám Phá Vận Mệnh</p>
+          <h1 class="hero__title">
+            Hé Lộ Bức Tranh<br>
+            <span class="gold-text">Cuộc Đời Bạn</span>
+          </h1>
+          <p class="hero__tagline">
+            Dựa trên tinh hoa Tử Vi Đẩu Số, chúng tôi giúp bạn giải mã lá số, thấu hiểu bản mệnh, đường công danh, tình duyên và vận hạn để làm chủ tương lai.
+          </p>
+          <div class="hero__cta">
+            <button class="btn btn-primary" id="cta-lap-la-so" onclick="document.getElementById('lap-la-so').scrollIntoView({behavior: 'smooth'})">
+              <i class="fa-solid fa-scroll"></i> Lập Lá Số Ngay
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         INPUT FORM SECTION (LẬP LÁ SỐ)
+         ========================================== -->
+    <section class="lap-la-so section" id="lap-la-so">
+      <div class="container">
+        <header class="section__header text-center">
+          <p class="section__subtitle gold-text">Nhập Thông Tin</p>
+          <h2 class="section__title">An Sao <span class="gold-text">Lập Số</span></h2>
+        </header>
+
+        <div class="form-container">
+          <form id="tuvi-form" class="tuvi-form">
+            <div class="form-group">
+              <label for="fullName">Họ và tên</label>
+              <input type="text" id="fullName" placeholder="Nhập họ và tên..." required>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group half">
+                <label for="gender">Giới tính</label>
+                <select id="gender" required>
+                  <option value="male">Nam</option>
+                  <option value="female">Nữ</option>
+                </select>
+              </div>
+              <div class="form-group half">
+                <label for="calendarType">Loại lịch</label>
+                <select id="calendarType" required>
+                  <option value="solar">Dương Lịch</option>
+                  <option value="lunar">Âm Lịch</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group half">
+                <label for="birthDate">Ngày sinh</label>
+                <input type="date" id="birthDate" required>
+              </div>
+              <div class="form-group half">
+                <label for="birthTime">Giờ sinh</label>
+                <select id="birthTime" required>
+                  <option value="Ty">Tý (23:00 - 00:59)</option>
+                  <option value="Suu">Sửu (01:00 - 02:59)</option>
+                  <option value="Dan">Dần (03:00 - 04:59)</option>
+                  <option value="Mao">Mão (05:00 - 06:59)</option>
+                  <option value="Thin">Thìn (07:00 - 08:59)</option>
+                  <option value="Ty_am">Tỵ (09:00 - 10:59)</option>
+                  <option value="Ngo">Ngọ (11:00 - 12:59)</option>
+                  <option value="Mui">Mùi (13:00 - 14:59)</option>
+                  <option value="Than">Thân (15:00 - 16:59)</option>
+                  <option value="Dau">Dậu (17:00 - 18:59)</option>
+                  <option value="Tuat">Tuất (19:00 - 20:59)</option>
+                  <option value="Hoi">Hợi (21:00 - 22:59)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="birthYear">Năm sinh xem hạn (Tùy chọn)</label>
+              <input type="number" id="birthYear" placeholder="Ví dụ: 2026">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fa-solid fa-yin-yang fa-spin-hover"></i> An Lá Số
+            </button>
+          </form>
+        </div>
+
+        <!-- RESULT SECTION (Hidden initially) -->
+        <div id="result-section" class="result-section hidden">
+          <div class="loading-overlay" id="loading-overlay">
+            <div class="mystic-spinner"></div>
+            <p>Đang an sao lập số...</p>
+          </div>
+          
+          <div class="result-content hidden" id="result-content">
+            <h3 class="result-title">Lá Số Tử Vi: <span id="res-name" class="gold-text"></span></h3>
+            <div class="result-info-grid">
+              <div class="info-item"><span>Giới tính:</span> <strong id="res-gender"></strong></div>
+              <div class="info-item"><span>Ngày sinh:</span> <strong id="res-dob"></strong></div>
+              <div class="info-item"><span>Giờ sinh:</span> <strong id="res-time"></strong></div>
+              <div class="info-item"><span>Mệnh cục:</span> <strong>Thạch Lựu Mộc (Mộc Mệnh)</strong></div>
+              <div class="info-item"><span>Âm dương:</span> <strong>Âm Nam/Nữ</strong></div>
+              <div class="info-item"><span>Cục:</span> <strong>Thủy Nhị Cục</strong></div>
+            </div>
+
+            <div class="chart-mock">
+              <div class="chart-center">
+                <h4>THIÊN BÀN</h4>
+                <p>Nơi giao thoa của Thiên - Địa - Nhân</p>
+                <div class="bagua-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+              </div>
+              <!-- Mock houses -->
+              <div class="house h-ty">Tý<br><small>Huynh Đệ</small></div>
+              <div class="house h-suu">Sửu<br><small>Mệnh</small></div>
+              <div class="house h-dan">Dần<br><small>Phụ Mẫu</small></div>
+              <div class="house h-mao">Mão<br><small>Phúc Đức</small></div>
+              <div class="house h-thin">Thìn<br><small>Điền Trạch</small></div>
+              <div class="house h-ty-am">Tỵ<br><small>Quan Lộc</small></div>
+              <div class="house h-ngo">Ngọ<br><small>Giao Hữu</small></div>
+              <div class="house h-mui">Mùi<br><small>Thiên Di</small></div>
+              <div class="house h-than">Thân<br><small>Tật Ách</small></div>
+              <div class="house h-dau">Dậu<br><small>Tài Bạch</small></div>
+              <div class="house h-tuat">Tuất<br><small>Tử Tức</small></div>
+              <div class="house h-hoi">Hợi<br><small>Phu Thê</small></div>
+            </div>
+
+            <div class="interpretation">
+              <h4>Lời Bàn Chung</h4>
+              <p>Người mang lá số này có Mệnh Thạch Lựu Mộc, bản tính lương thiện, ôn hòa nhưng bên trong tiềm tàng sức mạnh lớn. Giao thời tuổi trẻ có chút vất vả nhưng về trung vận sẽ phát đạt, đường công danh rộng mở. Chú ý giữ gìn sức khỏe ở độ tuổi trung niên.</p>
+              
+              <div class="interpretation-tabs">
+                <button class="tab-btn active">Mệnh - Thân</button>
+                <button class="tab-btn">Công Danh</button>
+                <button class="tab-btn">Tình Duyên</button>
+              </div>
+              <div class="tab-content">
+                <p><strong>Cung Mệnh:</strong> Có sao Tử Vi, Thiên Phủ tọa thủ, chủ về sự uy quyền, tài lộc dồi dào. Tính cách có phần gia trưởng hoặc muốn dẫn dắt người khác.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         INFO / KNOWLEDGE SECTION
+         ========================================== -->
+    <section class="kien-thuc section" id="kien-thuc">
+      <div class="container">
+        <header class="section__header text-center">
+          <p class="section__subtitle gold-text">Kiến Thức</p>
+          <h2 class="section__title">Tìm Hiểu Về <span class="gold-text">Tử Vi</span></h2>
+        </header>
+
+        <div class="cards-grid">
+          <div class="info-card">
+            <i class="fa-solid fa-star icon-gold"></i>
+            <h3>14 Chính Tinh</h3>
+            <p>Tìm hiểu ý nghĩa của 14 ngôi sao chính yếu quyết định vận mệnh trong lá số tử vi như Tử Vi, Thiên Cơ, Thái Dương, Vũ Khúc...</p>
+          </div>
+          <div class="info-card">
+            <i class="fa-solid fa-chess-board icon-gold"></i>
+            <h3>12 Cung Vị</h3>
+            <p>Ý nghĩa của 12 cung từ Mệnh, Huynh Đệ, Phụ Mẫu đến Phụ Thê, Tử Tức phản ánh các khía cạnh trong cuộc sống.</p>
+          </div>
+          <div class="info-card">
+            <i class="fa-solid fa-yin-yang icon-gold"></i>
+            <h3>Âm Dương Ngũ Hành</h3>
+            <p>Sự tương sinh, tương khắc của Kim, Mộc, Thủy, Hỏa, Thổ và cách chúng tác động đến lá số của bạn.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CONTACT SECTION
+         ========================================== -->
+    <section class="contact section" id="lien-he">
+      <div class="container">
+        <header class="section__header text-center">
+          <p class="section__subtitle gold-text">Kết Nối</p>
+          <h2 class="section__title">Liên Hệ <span class="gold-text">Tư Vấn</span></h2>
+        </header>
+
+        <div class="contact-info-wrapper">
+          <div class="contact-info-card">
+             <i class="fa-solid fa-envelope"></i>
+             <h4>Email</h4>
+             <p>nguyenhanh2799@gmail.com</p>
+          </div>
+          <div class="contact-info-card">
+             <i class="fa-solid fa-phone"></i>
+             <h4>Hotline</h4>
+             <p>0912 345 678</p>
+          </div>
+          <div class="contact-info-card">
+             <i class="fa-brands fa-facebook"></i>
+             <h4>Facebook Fanpage</h4>
+             <p>@thiencotuvi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="footer__container container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#home" class="footer__logo">
+            Thiên Cơ <span class="gold-text">Tử Vi</span>
+          </a>
+          <p>Luận giải lá số, khám phá thiên cơ, làm chủ vận mệnh.</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Nguyễn Phương Anh. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
