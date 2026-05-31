@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nguyễn Phương Anh — Portfolio</title>
+  <meta name="description" content="Personal portfolio of Nguyễn Phương Anh — International Economics Student with a passion for spiritual arts, cultural projects, and web creation." />
+  <meta name="keywords" content="Nguyễn Phương Anh, portfolio, international economics, FTU, web developer, Vietnamese" />
+  <meta name="author" content="Nguyễn Phương Anh" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nguyễn Phương Anh — Portfolio" />
+  <meta property="og:description" content="International Economics Student | Spiritual Arts Enthusiast | Creator" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="portfolio.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       PRELOADER
+       ============================================================ -->
+  <div class="pf-preloader" id="pf-preloader">
+    <div class="pf-preloader__inner">
+      <div class="pf-rune-ring">
+        <svg viewBox="0 0 200 200" class="pf-rune-svg">
+          <circle cx="100" cy="100" r="90" class="pf-rune-circle" />
+          <circle cx="100" cy="100" r="70" class="pf-rune-circle pf-rune-circle--inner" />
+          <!-- Rune marks -->
+          <g class="pf-rune-marks">
+            <line x1="100" y1="10" x2="100" y2="30" />
+            <line x1="100" y1="170" x2="100" y2="190" />
+            <line x1="10" y1="100" x2="30" y2="100" />
+            <line x1="170" y1="100" x2="190" y2="100" />
+            <line x1="27" y1="27" x2="42" y2="42" />
+            <line x1="158" y1="158" x2="173" y2="173" />
+            <line x1="173" y1="27" x2="158" y2="42" />
+            <line x1="27" y1="173" x2="42" y2="158" />
+          </g>
+          <!-- Inner star -->
+          <polygon class="pf-rune-star" points="100,60 112,90 145,90 120,110 130,140 100,122 70,140 80,110 55,90 88,90" />
+        </svg>
+      </div>
+      <p class="pf-preloader__text">Entering the Realm...</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PARTICLES / FLOATING RUNES CANVAS
+       ============================================================ -->
+  <canvas id="pf-particles" class="pf-particles"></canvas>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="pf-nav" id="pf-nav">
+    <div class="pf-nav__container">
+      <a href="#pf-hero" class="pf-nav__logo" id="pf-nav-logo">
+        <span class="pf-nav__logo-symbol">✦</span>
+        <span>P.Anh</span>
+      </a>
+
+      <ul class="pf-nav__menu" id="pf-nav-menu">
+        <li><a href="#pf-hero"    class="pf-nav__link pf-nav__link--active" data-section="pf-hero">Home</a></li>
+        <li><a href="#pf-about"   class="pf-nav__link" data-section="pf-about">About</a></li>
+        <li><a href="#pf-skills"  class="pf-nav__link" data-section="pf-skills">Skills</a></li>
+        <li><a href="#pf-project" class="pf-nav__link" data-section="pf-project">Projects</a></li>
+        <li><a href="#pf-contact" class="pf-nav__link" data-section="pf-contact">Contact</a></li>
+      </ul>
+
+      <a href="https://github.com/phanhbleble" target="_blank" rel="noopener" class="pf-nav__github" id="pf-nav-github" aria-label="GitHub Profile">
+        <i class="fa-brands fa-github"></i>
+      </a>
+
+      <button class="pf-nav__toggle" id="pf-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         HERO SECTION
+         ============================================================ -->
+    <section class="pf-hero pf-section" id="pf-hero">
+      <div class="pf-hero__bg" aria-hidden="true">
+        <img src="portfolio_hero_bg.png" alt="" class="pf-hero__bg-img" />
+        <div class="pf-hero__bg-overlay"></div>
+        <div class="pf-hero__bg-vignette"></div>
+      </div>
+
+      <!-- Decorative corners -->
+      <div class="pf-corner pf-corner--tl" aria-hidden="true"></div>
+      <div class="pf-corner pf-corner--tr" aria-hidden="true"></div>
+      <div class="pf-corner pf-corner--bl" aria-hidden="true"></div>
+      <div class="pf-corner pf-corner--br" aria-hidden="true"></div>
+
+      <div class="pf-hero__container pf-container">
+        <div class="pf-hero__content">
+          <div class="pf-hero__eyebrow">
+            <span class="pf-rune-deco">⚜</span>
+            <span class="pf-hero__eyebrow-text">Personal Codex</span>
+            <span class="pf-rune-deco">⚜</span>
+          </div>
+
+          <h1 class="pf-hero__name">
+            <span class="pf-hero__name-line1">Nguyễn</span>
+            <span class="pf-hero__name-line2">Phương <span class="pf-gold">Anh</span></span>
+          </h1>
+
+          <div class="pf-hero__role" id="pf-typed-role">
+            <span class="pf-hero__role-prefix">[ </span>
+            <span class="pf-hero__role-text" id="pf-typed-text"></span>
+            <span class="pf-hero__role-cursor">|</span>
+            <span class="pf-hero__role-prefix"> ]</span>
+          </div>
+
+          <p class="pf-hero__tagline">
+            An <em>International Economics</em> student weaving together the threads of finance, culture, and mystical arts — exploring the cosmos through both spreadsheets and star charts.
+          </p>
+
+          <div class="pf-hero__cta">
+            <a href="#pf-about" class="pf-btn pf-btn--primary" id="pf-hero-cta1">
+              <i class="fa-solid fa-scroll"></i> My Chronicle
+            </a>
+            <a href="#pf-contact" class="pf-btn pf-btn--ghost" id="pf-hero-cta2">
+              <i class="fa-solid fa-envelope-open-text"></i> Send Message
+            </a>
+          </div>
+
+          <div class="pf-hero__social">
+            <a href="https://github.com/phanhbleble" target="_blank" rel="noopener" class="pf-hero__social-link" id="pf-social-github" aria-label="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="pf-hero__social-link" id="pf-social-linkedin" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:nguyenhanh2799@gmail.com" class="pf-hero__social-link" id="pf-social-email" aria-label="Email">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://www.facebook.com/thiencotuvi" target="_blank" rel="noopener" class="pf-hero__social-link" id="pf-social-fb" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tarot card floating aside -->
+        <div class="pf-hero__card-wrap" aria-hidden="true">
+          <div class="pf-tarot-card" id="pf-tarot-card">
+            <div class="pf-tarot-card__inner">
+              <div class="pf-tarot-card__front">
+                <div class="pf-tarot-card__header">The Seeker</div>
+                <div class="pf-tarot-card__symbol">
+                  <svg viewBox="0 0 120 120" class="pf-tarot-star-svg">
+                    <circle cx="60" cy="60" r="55" class="pf-tarot-ring" />
+                    <circle cx="60" cy="60" r="40" class="pf-tarot-ring pf-tarot-ring--2" />
+                    <polygon class="pf-tarot-star-poly" points="60,15 72,48 107,48 78,68 90,100 60,80 30,100 42,68 13,48 48,48" />
+                  </svg>
+                </div>
+                <div class="pf-tarot-card__body">
+                  <p class="pf-tarot-card__name">Phương Anh</p>
+                  <p class="pf-tarot-card__title">Intl. Economics · FTU</p>
+                  <div class="pf-tarot-card__divider"></div>
+                  <div class="pf-tarot-card__attrs">
+                    <span><i class="fa-solid fa-globe"></i> Economics</span>
+                    <span><i class="fa-solid fa-moon"></i> Spiritual Arts</span>
+                    <span><i class="fa-solid fa-code"></i> Web Dev</span>
+                  </div>
+                </div>
+                <div class="pf-tarot-card__number">I</div>
+                <div class="pf-tarot-card__footer">Nguyen Phuong Anh · 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-hero__scroll-hint" aria-hidden="true">
+        <span>Scroll to descend</span>
+        <i class="fa-solid fa-chevron-down pf-bounce"></i>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT SECTION
+         ============================================================ -->
+    <section class="pf-about pf-section" id="pf-about">
+      <div class="pf-about__arcane-line" aria-hidden="true"></div>
+      <div class="pf-container">
+        <div class="pf-section-header">
+          <p class="pf-section-eyebrow">
+            <span class="pf-rune-deco">✦</span> About the Seeker <span class="pf-rune-deco">✦</span>
+          </p>
+          <h2 class="pf-section-title">My <span class="pf-gold">Chronicle</span></h2>
+        </div>
+
+        <div class="pf-about__grid">
+          <div class="pf-about__text pf-reveal">
+            <div class="pf-about__quote">
+              <i class="fa-solid fa-quote-left"></i>
+              <blockquote>Between the stars and the spreadsheets lies who I truly am.</blockquote>
+            </div>
+            <p>
+              I am <strong>Nguyễn Phương Anh</strong> — a student of <strong>International Economics</strong> with a deep passion for exploring the invisible threads that weave through cultures, markets, and the mystical arts.
+            </p>
+            <p>
+              By day, I analyze trade policies and economic models. By night, I immerse myself in the ancient wisdom of <strong>Tử Vi Đẩu Số</strong> (Vietnamese Celestial Astrology), tarot symbolism, and the spiritual heritage of Vietnam. I believe that true understanding—of economics, of people, of the world—requires both analytical rigor and intuitive depth.
+            </p>
+            <p>
+              This portfolio is my <em>codex</em> — a living record of my journey as a student, creator, and seeker.
+            </p>
+
+            <div class="pf-about__info-grid">
+              <div class="pf-about__info-item">
+                <span class="pf-about__info-label"><i class="fa-solid fa-university"></i> University</span>
+                <span class="pf-about__info-value">Foreign Trade University (FTU)</span>
+              </div>
+              <div class="pf-about__info-item">
+                <span class="pf-about__info-label"><i class="fa-solid fa-graduation-cap"></i> Major</span>
+                <span class="pf-about__info-value">International Economics</span>
+              </div>
+              <div class="pf-about__info-item">
+                <span class="pf-about__info-label"><i class="fa-solid fa-location-dot"></i> Location</span>
+                <span class="pf-about__info-value">Vietnam</span>
+              </div>
+              <div class="pf-about__info-item">
+                <span class="pf-about__info-label"><i class="fa-solid fa-language"></i> Languages</span>
+                <span class="pf-about__info-value">Vietnamese · English</span>
+              </div>
+            </div>
+
+            <a href="#pf-contact" class="pf-btn pf-btn--primary" id="pf-about-cta">
+              <i class="fa-solid fa-paper-plane"></i> Get in Touch
+            </a>
+          </div>
+
+          <!-- Stat cards -->
+          <div class="pf-about__stats pf-reveal pf-reveal--delay">
+            <div class="pf-stat-card" id="pf-stat-1">
+              <div class="pf-stat-card__icon"><i class="fa-solid fa-star-and-crescent"></i></div>
+              <div class="pf-stat-card__num pf-count" data-target="3">0</div>
+              <div class="pf-stat-card__label">Years in Spiritual Study</div>
+            </div>
+            <div class="pf-stat-card" id="pf-stat-2">
+              <div class="pf-stat-card__icon"><i class="fa-solid fa-globe"></i></div>
+              <div class="pf-stat-card__num pf-count" data-target="2">0</div>
+              <div class="pf-stat-card__label">Projects Launched</div>
+            </div>
+            <div class="pf-stat-card" id="pf-stat-3">
+              <div class="pf-stat-card__icon"><i class="fa-solid fa-book-open"></i></div>
+              <div class="pf-stat-card__num pf-count" data-target="4">0</div>
+              <div class="pf-stat-card__label">Semesters at FTU</div>
+            </div>
+            <div class="pf-stat-card" id="pf-stat-4">
+              <div class="pf-stat-card__icon"><i class="fa-solid fa-moon"></i></div>
+              <div class="pf-stat-card__num pf-count" data-target="78">0</div>
+              <div class="pf-stat-card__label">Tarot Cards Mastered</div>
+            </div>
+
+            <!-- Ornamental divider -->
+            <div class="pf-about__ornament" aria-hidden="true">
+              <div class="pf-about__ornament-line"></div>
+              <span>✦ ✦ ✦</span>
+              <div class="pf-about__ornament-line"></div>
+            </div>
+
+            <!-- Zodiac / interest badges -->
+            <div class="pf-about__badges">
+              <span class="pf-badge"><i class="fa-solid fa-dharmachakra"></i> Tử Vi</span>
+              <span class="pf-badge"><i class="fa-solid fa-moon"></i> Tarot</span>
+              <span class="pf-badge"><i class="fa-solid fa-coins"></i> Economics</span>
+              <span class="pf-badge"><i class="fa-solid fa-dragon"></i> Folklore</span>
+              <span class="pf-badge"><i class="fa-solid fa-code"></i> Web Dev</span>
+              <span class="pf-badge"><i class="fa-solid fa-feather-pointed"></i> Writing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SKILLS SECTION
+         ============================================================ -->
+    <section class="pf-skills pf-section" id="pf-skills">
+      <div class="pf-skills__bg-sigil" aria-hidden="true"></div>
+      <div class="pf-container">
+        <div class="pf-section-header pf-text-center">
+          <p class="pf-section-eyebrow">
+            <span class="pf-rune-deco">✦</span> Abilities & Mastery <span class="pf-rune-deco">✦</span>
+          </p>
+          <h2 class="pf-section-title">The <span class="pf-gold">Arcane Arts</span></h2>
+          <p class="pf-section-sub">Tools, disciplines, and knowledge domains I've cultivated on my journey.</p>
+        </div>
+
+        <div class="pf-skills__grid">
+
+          <!-- Card: Academic Disciplines -->
+          <div class="pf-skill-card pf-reveal" id="pf-skill-1">
+            <div class="pf-skill-card__glow"></div>
+            <div class="pf-skill-card__header">
+              <div class="pf-skill-card__icon pf-skill-card__icon--gold">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <h3 class="pf-skill-card__title">Academic Arts</h3>
+            </div>
+            <div class="pf-skill-card__bars">
+              <div class="pf-skillbar" data-level="88">
+                <span class="pf-skillbar__name">International Economics</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar" data-level="80">
+                <span class="pf-skillbar__name">Trade Policy & Analysis</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar" data-level="75">
+                <span class="pf-skillbar__name">Economic Research</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar" data-level="70">
+                <span class="pf-skillbar__name">Data & Statistics</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: Spiritual Arts -->
+          <div class="pf-skill-card pf-reveal pf-reveal--delay" id="pf-skill-2">
+            <div class="pf-skill-card__glow pf-skill-card__glow--purple"></div>
+            <div class="pf-skill-card__header">
+              <div class="pf-skill-card__icon pf-skill-card__icon--purple">
+                <i class="fa-solid fa-moon"></i>
+              </div>
+              <h3 class="pf-skill-card__title">Mystical Arts</h3>
+            </div>
+            <div class="pf-skill-card__bars">
+              <div class="pf-skillbar pf-skillbar--purple" data-level="90">
+                <span class="pf-skillbar__name">Tử Vi Đẩu Số</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar pf-skillbar--purple" data-level="85">
+                <span class="pf-skillbar__name">Tarot Reading</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar pf-skillbar--purple" data-level="75">
+                <span class="pf-skillbar__name">Vietnamese Folklore & Myths</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar pf-skillbar--purple" data-level="70">
+                <span class="pf-skillbar__name">Feng Shui Principles</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: Digital & Creative -->
+          <div class="pf-skill-card pf-reveal pf-reveal--delay2" id="pf-skill-3">
+            <div class="pf-skill-card__glow pf-skill-card__glow--teal"></div>
+            <div class="pf-skill-card__header">
+              <div class="pf-skill-card__icon pf-skill-card__icon--teal">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <h3 class="pf-skill-card__title">Digital Craft</h3>
+            </div>
+            <div class="pf-skill-card__bars">
+              <div class="pf-skillbar pf-skillbar--teal" data-level="78">
+                <span class="pf-skillbar__name">HTML / CSS</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar pf-skillbar--teal" data-level="65">
+                <span class="pf-skillbar__name">JavaScript</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar pf-skillbar--teal" data-level="80">
+                <span class="pf-skillbar__name">Content Creation</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+              <div class="pf-skillbar pf-skillbar--teal" data-level="72">
+                <span class="pf-skillbar__name">Social Media Strategy</span>
+                <div class="pf-skillbar__track"><div class="pf-skillbar__fill"></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Attribute runes row -->
+        <div class="pf-attribute-row pf-reveal">
+          <div class="pf-attribute" id="pf-attr-1">
+            <div class="pf-attribute__icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="pf-attribute__label">Curiosity</div>
+          </div>
+          <div class="pf-attribute" id="pf-attr-2">
+            <div class="pf-attribute__icon"><i class="fa-solid fa-pen-nib"></i></div>
+            <div class="pf-attribute__label">Creativity</div>
+          </div>
+          <div class="pf-attribute" id="pf-attr-3">
+            <div class="pf-attribute__icon"><i class="fa-solid fa-handshake"></i></div>
+            <div class="pf-attribute__label">Empathy</div>
+          </div>
+          <div class="pf-attribute" id="pf-attr-4">
+            <div class="pf-attribute__icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div class="pf-attribute__label">Analysis</div>
+          </div>
+          <div class="pf-attribute" id="pf-attr-5">
+            <div class="pf-attribute__icon"><i class="fa-solid fa-infinity"></i></div>
+            <div class="pf-attribute__label">Dedication</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECTS SECTION
+         ============================================================ -->
+    <section class="pf-project pf-section" id="pf-project">
+      <div class="pf-container">
+        <div class="pf-section-header pf-text-center">
+          <p class="pf-section-eyebrow">
+            <span class="pf-rune-deco">✦</span> Creations & Quests <span class="pf-rune-deco">✦</span>
+          </p>
+          <h2 class="pf-section-title">The <span class="pf-gold">Grimoire</span></h2>
+          <p class="pf-section-sub">A collection of my works — from mystical web experiences to academic endeavors.</p>
+        </div>
+
+        <div class="pf-project__grid">
+
+          <!-- Featured project -->
+          <article class="pf-project-card pf-project-card--featured pf-reveal" id="pf-proj-1">
+            <div class="pf-project-card__badge">Featured Quest</div>
+            <div class="pf-project-card__glow"></div>
+            <div class="pf-project-card__content">
+              <div class="pf-project-card__icon-wrap">
+                <div class="pf-project-card__icon">
+                  <i class="fa-solid fa-dharmachakra"></i>
+                </div>
+              </div>
+              <div class="pf-project-card__body">
+                <h3 class="pf-project-card__title">Thiên Cơ Tử Vi</h3>
+                <p class="pf-project-card__sub">Vietnamese Celestial Astrology Platform</p>
+                <p class="pf-project-card__desc">
+                  A mystical web application for casting and interpreting <em>Tử Vi Đẩu Số</em> (Vietnamese celestial birth charts). Users enter their birth details to receive a full 12-palace chart with AI-assisted interpretations covering destiny, career, love, and fortune cycles.
+                </p>
+                <div class="pf-project-card__tags">
+                  <span class="pf-tag">HTML5</span>
+                  <span class="pf-tag">CSS3</span>
+                  <span class="pf-tag">JavaScript</span>
+                  <span class="pf-tag">Tử Vi System</span>
+                  <span class="pf-tag">Web Design</span>
+                </div>
+                <div class="pf-project-card__actions">
+                  <a href="tuvi.html" class="pf-btn pf-btn--primary pf-btn--sm" id="pf-proj-1-live" target="_blank">
+                    <i class="fa-solid fa-eye"></i> View Live
+                  </a>
+                  <a href="https://github.com/phanhbleble" class="pf-btn pf-btn--ghost pf-btn--sm" id="pf-proj-1-code" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-github"></i> Source
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="pf-project-card pf-reveal pf-reveal--delay" id="pf-proj-2">
+            <div class="pf-project-card__glow pf-project-card__glow--purple"></div>
+            <div class="pf-project-card__content">
+              <div class="pf-project-card__icon-wrap">
+                <div class="pf-project-card__icon pf-project-card__icon--purple">
+                  <i class="fa-solid fa-scroll"></i>
+                </div>
+              </div>
+              <div class="pf-project-card__body">
+                <h3 class="pf-project-card__title">FTU Economics Blog</h3>
+                <p class="pf-project-card__sub">Academic Writing & Analysis</p>
+                <p class="pf-project-card__desc">
+                  A series of research essays and economic analyses exploring Vietnam's role in global trade, ASEAN economic integration, and the intersection of traditional culture with modern market dynamics.
+                </p>
+                <div class="pf-project-card__tags">
+                  <span class="pf-tag">Research</span>
+                  <span class="pf-tag">Economics</span>
+                  <span class="pf-tag">Writing</span>
+                </div>
+                <div class="pf-project-card__actions">
+                  <a href="#pf-contact" class="pf-btn pf-btn--ghost pf-btn--sm" id="pf-proj-2-contact">
+                    <i class="fa-solid fa-envelope"></i> Request Access
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="pf-project-card pf-reveal pf-reveal--delay2" id="pf-proj-3">
+            <div class="pf-project-card__glow pf-project-card__glow--teal"></div>
+            <div class="pf-project-card__content">
+              <div class="pf-project-card__icon-wrap">
+                <div class="pf-project-card__icon pf-project-card__icon--teal">
+                  <i class="fa-solid fa-moon"></i>
+                </div>
+              </div>
+              <div class="pf-project-card__body">
+                <h3 class="pf-project-card__title">Tarot Community Page</h3>
+                <p class="pf-project-card__sub">Spiritual Education & Community</p>
+                <p class="pf-project-card__desc">
+                  A curated Facebook community dedicated to introducing Vietnamese audiences to the art of tarot, blending Western arcana with Eastern spiritual philosophy and daily reading guidance.
+                </p>
+                <div class="pf-project-card__tags">
+                  <span class="pf-tag">Community</span>
+                  <span class="pf-tag">Tarot</span>
+                  <span class="pf-tag">Social Media</span>
+                </div>
+                <div class="pf-project-card__actions">
+                  <a href="https://www.facebook.com/" class="pf-btn pf-btn--ghost pf-btn--sm" id="pf-proj-3-fb" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-facebook"></i> Community
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT SECTION
+         ============================================================ -->
+    <section class="pf-contact pf-section" id="pf-contact">
+      <div class="pf-contact__bg-glow" aria-hidden="true"></div>
+      <div class="pf-container">
+        <div class="pf-section-header pf-text-center">
+          <p class="pf-section-eyebrow">
+            <span class="pf-rune-deco">✦</span> Send a Raven <span class="pf-rune-deco">✦</span>
+          </p>
+          <h2 class="pf-section-title">Open <span class="pf-gold">a Portal</span></h2>
+          <p class="pf-section-sub">I'm open to collaborations, academic discussions, spiritual consultations, or simply a good conversation.</p>
+        </div>
+
+        <div class="pf-contact__grid">
+          <div class="pf-contact__info pf-reveal">
+            <div class="pf-contact__card" id="pf-contact-email">
+              <div class="pf-contact__card-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+              <h4>Email</h4>
+              <a href="mailto:nguyenhanh2799@gmail.com">nguyenhanh2799@gmail.com</a>
+            </div>
+            <div class="pf-contact__card" id="pf-contact-fb">
+              <div class="pf-contact__card-icon"><i class="fa-brands fa-facebook-messenger"></i></div>
+              <h4>Facebook</h4>
+              <a href="https://www.facebook.com/thiencotuvi" target="_blank" rel="noopener">@thiencotuvi</a>
+            </div>
+            <div class="pf-contact__card" id="pf-contact-phone">
+              <div class="pf-contact__card-icon"><i class="fa-solid fa-phone-volume"></i></div>
+              <h4>Phone / Zalo</h4>
+              <a href="tel:+84912345678">0912 345 678</a>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <form class="pf-contact__form pf-reveal pf-reveal--delay" id="pf-contact-form" novalidate>
+            <div class="pf-form-group">
+              <label for="pf-name">Your Name</label>
+              <input type="text" id="pf-name" placeholder="Who calls upon me?" required />
+            </div>
+            <div class="pf-form-group">
+              <label for="pf-email">Your Email</label>
+              <input type="email" id="pf-email" placeholder="your@email.com" required />
+            </div>
+            <div class="pf-form-group">
+              <label for="pf-subject">Subject</label>
+              <input type="text" id="pf-subject" placeholder="What do you seek?" />
+            </div>
+            <div class="pf-form-group">
+              <label for="pf-message">Message</label>
+              <textarea id="pf-message" rows="5" placeholder="Speak your truth..." required></textarea>
+            </div>
+            <button type="submit" class="pf-btn pf-btn--primary pf-btn--block" id="pf-submit-btn">
+              <i class="fa-solid fa-paper-plane"></i> Dispatch the Raven
+            </button>
+            <p class="pf-form-feedback" id="pf-form-feedback"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="pf-footer">
+    <div class="pf-footer__sigil" aria-hidden="true">
+      <svg viewBox="0 0 100 100" class="pf-footer__sigil-svg">
+        <circle cx="50" cy="50" r="45" class="pf-footer__sigil-ring"/>
+        <polygon class="pf-footer__sigil-star" points="50,15 59,40 86,40 64,57 73,82 50,65 27,82 36,57 14,40 41,40"/>
+      </svg>
+    </div>
+    <div class="pf-container">
+      <div class="pf-footer__top">
+        <a href="#pf-hero" class="pf-footer__logo">
+          <span class="pf-gold">✦</span> Nguyễn Phương Anh <span class="pf-gold">✦</span>
+        </a>
+        <p class="pf-footer__tagline">International Economics · Spiritual Arts · Creator</p>
+        <div class="pf-footer__social">
+          <a href="https://github.com/phanhbleble" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.facebook.com/thiencotuvi" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="mailto:nguyenhanh2799@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="pf-footer__bottom">
+        <div class="pf-footer__line"></div>
+        <p>&copy; 2026 Nguyễn Phương Anh. Crafted with <span class="pf-gold">✦</span> and ancient wisdom.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button class="pf-back-top" id="pf-back-top" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script src="portfolio.js"></script>
+</body>
+</html>
