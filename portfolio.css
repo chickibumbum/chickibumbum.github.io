@@ -616,12 +616,14 @@ button { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000
 }
 
 .pf-tarot-card__symbol {
-  width: 120px;
-  height: 120px;
-  margin: 6px auto;
+  width: 130px;
+  height: 130px;
+  margin: 4px auto 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .pf-tarot-star-svg { width: 100%; height: 100%; overflow: visible; }
@@ -677,132 +679,84 @@ button { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000
 }
 
 /* ============================================================
-   AVATAR — Glowing Circular Portrait
+   AVATAR — Glowing Circular Portrait (padding-spin technique)
    ============================================================ */
-.pf-avatar-wrap {
-  position: relative;
-  width: 110px;
-  height: 110px;
+
+/* The frame IS the spinning ring — conic-gradient bg + padding */
+.pf-avatar-frame {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(
+    from 0deg,
+    #d4af37 0%,
+    #c39bd3 20%,
+    #f3e5ab 40%,
+    #9b59b6 60%,
+    #d4af37 80%,
+    #f3e5ab 100%
+  );
+  animation: pf-avatar-spin 3.5s linear infinite;
+  box-shadow:
+    0 0 16px rgba(212,175,55,0.55),
+    0 0 32px rgba(155,89,182,0.35),
+    0 0 50px rgba(212,175,55,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-/* Outer spinning gradient ring */
-.pf-avatar-ring {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-.pf-avatar-ring--outer {
-  inset: -8px;
-  background: conic-gradient(
-    from 0deg,
-    var(--pf-gold) 0%,
-    var(--pf-purple) 25%,
-    transparent 40%,
-    var(--pf-gold-light) 60%,
-    var(--pf-purple-light) 80%,
-    var(--pf-gold) 100%
-  );
-  animation: pf-avatar-spin 4s linear infinite;
-  filter: blur(1px);
-  opacity: 0.9;
-}
-.pf-avatar-ring--inner {
-  inset: -4px;
-  background: conic-gradient(
-    from 180deg,
-    var(--pf-purple) 0%,
-    var(--pf-gold) 30%,
-    transparent 50%,
-    var(--pf-gold) 70%,
-    var(--pf-purple) 100%
-  );
-  animation: pf-avatar-spin 6s linear infinite reverse;
-  opacity: 0.6;
-}
-
-/* Circular image */
-.pf-avatar-img-wrap {
-  position: relative;
+/* Inner circle counter-rotates so image stays upright */
+.pf-avatar-circle {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(212,175,55,0.4);
-  background: var(--pf-bg-2);
-  z-index: 2;
-  box-shadow:
-    0 0 20px rgba(212,175,55,0.3),
-    0 0 40px rgba(155,89,182,0.2),
-    inset 0 0 20px rgba(8,9,16,0.3);
+  background: #080910;
+  animation: pf-avatar-spin 3.5s linear infinite reverse;
 }
+
 .pf-avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
+  display: block;
   border-radius: 50%;
-  transition: transform 0.5s ease;
-}
-.pf-avatar-img-wrap:hover .pf-avatar-img {
-  transform: scale(1.06);
 }
 
-/* Shimmer overlay on hover */
-.pf-avatar-img-wrap::after {
-  content: '';
+/* Sparkles — positioned within the 130px symbol box */
+.pf-avatar-orbit {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.12) 0%,
-    transparent 50%,
-    rgba(212,175,55,0.08) 100%
-  );
   pointer-events: none;
 }
 
-/* Floating sparkle stars around the avatar */
-.pf-avatar-sparkles {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 3;
-}
 .pf-avatar-spark {
   position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--pf-gold);
-  box-shadow: 0 0 6px 2px var(--pf-gold-glow);
-  --angle: calc(var(--i) * 45deg);
-  --r: 62px;
-  top: calc(50% + var(--r) * sin(var(--angle)) - 2.5px);
-  left: calc(50% + var(--r) * cos(var(--angle)) - 2.5px);
-  animation: pf-spark-pulse calc(1.5s + var(--i) * 0.2s) ease-in-out infinite alternate;
+  top: 50%;
+  left: 50%;
+  font-size: 9px;
+  line-height: 1;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px;
+  transform: rotate(calc(var(--i) * 45deg)) translateY(-58px);
+  animation: pf-spark-twinkle calc(1.1s + var(--i) * 0.15s) ease-in-out infinite alternate;
 }
-.pf-avatar-spark:nth-child(even) {
-  background: var(--pf-purple-light);
-  box-shadow: 0 0 6px 2px var(--pf-purple-glow);
-  width: 4px;
-  height: 4px;
-  --r: 58px;
-}
+.pf-avatar-spark:nth-child(odd)  { color: #d4af37; filter: drop-shadow(0 0 4px rgba(212,175,55,0.9)); }
+.pf-avatar-spark:nth-child(even) { color: #c39bd3; filter: drop-shadow(0 0 4px rgba(195,155,211,0.9)); font-size: 7px; }
 
 @keyframes pf-avatar-spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
-@keyframes pf-spark-pulse {
-  0%   { opacity: 0.2; transform: scale(0.6); }
-  50%  { opacity: 1;   transform: scale(1.4); }
-  100% { opacity: 0.4; transform: scale(0.8); }
+@keyframes pf-spark-twinkle {
+  0%   { opacity: 0.1; transform: rotate(calc(var(--i) * 45deg)) translateY(-58px) scale(0.4); }
+  100% { opacity: 1;   transform: rotate(calc(var(--i) * 45deg)) translateY(-58px) scale(1.4); }
 }
 
 /* ============================================================
